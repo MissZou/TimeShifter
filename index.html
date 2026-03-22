@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TimeShifter Web</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Jet Lag Planner</p>
+          <h1>TimeShifter 风格的网页版倒时差助手</h1>
+          <p class="hero-text">
+            输入出发与到达信息，生成一份以睡眠、光照、咖啡因和褪黑素为核心的过渡计划。
+            这是一个可解释的前端原型，适合用来快速安排跨时区旅行。
+          </p>
+          <div class="hero-metrics">
+            <div class="metric">
+              <span class="metric-label">建议输出</span>
+              <strong>逐日时间轴</strong>
+            </div>
+            <div class="metric">
+              <span class="metric-label">算法风格</span>
+              <strong>渐进式移相</strong>
+            </div>
+            <div class="metric">
+              <span class="metric-label">运行方式</span>
+              <strong>纯前端离线</strong>
+            </div>
+          </div>
+        </div>
+        <aside class="hero-panel">
+          <div class="panel-glow"></div>
+          <p class="panel-label">Plan Preview</p>
+          <div class="panel-grid">
+            <div>
+              <span>光照</span>
+              <strong>在正确时间找光</strong>
+            </div>
+            <div>
+              <span>睡眠</span>
+              <strong>分天逐步提前或推后</strong>
+            </div>
+            <div>
+              <span>刺激物</span>
+              <strong>咖啡因窗口可控</strong>
+            </div>
+            <div>
+              <span>恢复</span>
+              <strong>落地后继续跟进</strong>
+            </div>
+          </div>
+        </aside>
+      </header>
+
+      <main class="layout">
+        <section class="card form-card">
+          <div class="section-title">
+            <p class="eyebrow">Trip Builder</p>
+            <h2>输入行程</h2>
+          </div>
+          <form id="planner-form" novalidate>
+            <div class="field-grid">
+              <label class="field">
+                <span>出发时区</span>
+                <select id="origin-timezone" name="originTimezone" required></select>
+              </label>
+
+              <label class="field">
+                <span>目的地时区</span>
+                <select id="destination-timezone" name="destinationTimezone" required></select>
+              </label>
+
+              <label class="field">
+                <span>出发时间</span>
+                <input id="departure-datetime" name="departureDatetime" type="datetime-local" required />
+              </label>
+
+              <label class="field">
+                <span>到达时间</span>
+                <input id="arrival-datetime" name="arrivalDatetime" type="datetime-local" required />
+              </label>
+
+              <label class="field">
+                <span>平时入睡时间</span>
+                <input id="sleep-time" name="sleepTime" type="time" value="23:00" required />
+              </label>
+
+              <label class="field">
+                <span>平时起床时间</span>
+                <input id="wake-time" name="wakeTime" type="time" value="07:00" required />
+              </label>
+
+              <label class="field">
+                <span>晨型 / 夜型</span>
+                <select id="chronotype" name="chronotype">
+                  <option value="early">偏晨型</option>
+                  <option value="balanced" selected>中间型</option>
+                  <option value="late">偏夜型</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>最多提前准备</span>
+                <select id="prep-days" name="prepDays">
+                  <option value="2">2 天</option>
+                  <option value="3" selected>3 天</option>
+                  <option value="4">4 天</option>
+                  <option value="5">5 天</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="checkbox-row">
+              <input id="melatonin-ok" name="melatoninOk" type="checkbox" checked />
+              <span>输出褪黑素建议</span>
+            </label>
+
+            <section class="cloud-sync-box">
+              <p class="cloud-sync-title">Supabase 云同步</p>
+              <div class="field-grid">
+                <label class="field">
+                  <span>Supabase URL</span>
+                  <input id="supabase-url" type="url" placeholder="https://xxxx.supabase.co" />
+                </label>
+                <label class="field">
+                  <span>Supabase Anon Key</span>
+                  <input id="supabase-anon-key" type="password" placeholder="eyJ..." />
+                </label>
+                <label class="field">
+                  <span>同步码</span>
+                  <input id="cloud-sync-key" type="text" placeholder="例如 my-trip-key-001" />
+                </label>
+              </div>
+              <div class="actions">
+                <button type="button" id="cloud-connect" class="ghost-button">连接云端</button>
+                <button type="button" id="cloud-load-latest" class="ghost-button">拉取最近计划</button>
+              </div>
+              <p id="cloud-status" class="fine-print">未连接云端，仅本地保存。</p>
+            </section>
+
+            <div class="actions">
+              <button type="submit" class="primary-button">生成倒时差计划</button>
+              <button type="button" id="reset-form" class="ghost-button">恢复默认</button>
+            </div>
+            <p class="fine-print">
+              说明：这是基于通用节律规则的辅助工具，不替代医生建议；孕期、重大睡眠障碍或特殊用药人群应谨慎使用褪黑素相关建议。
+            </p>
+          </form>
+        </section>
+
+        <section class="results-column">
+          <article class="card summary-card" id="summary-card">
+            <div class="section-title">
+              <p class="eyebrow">Trip Summary</p>
+              <h2>计划概览</h2>
+            </div>
+            <div id="summary-content" class="empty-state">
+              生成计划后，这里会显示跨时区方向、时差规模、预计适应节奏和旅行日重点提醒。
+            </div>
+          </article>
+        </section>
+
+        <article class="card timeline-card">
+          <div class="section-title timeline-title-row">
+            <div>
+              <p class="eyebrow">Daily Timeline</p>
+              <h2>逐日建议</h2>
+            </div>
+            <button type="button" id="export-calendar" class="ghost-button export-button" disabled>
+              导入到苹果日历(.ics)
+            </button>
+          </div>
+          <div id="timeline" class="timeline empty-state">
+            还没有计划。先填写行程，再生成你的倒时差时间轴。
+          </div>
+        </article>
+      </main>
+    </div>
+
+    <template id="day-card-template">
+      <article class="day-card">
+        <div class="day-header">
+          <div>
+            <p class="day-label"></p>
+            <h3 class="day-title"></h3>
+          </div>
+          <span class="day-phase"></span>
+        </div>
+        <div class="day-times"></div>
+        <ul class="day-actions"></ul>
+      </article>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
