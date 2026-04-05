@@ -46,12 +46,45 @@ function populateTimezones() {
     ? Intl.supportedValuesOf("timeZone")
     : fallbackTimezones();
 
+  const defaultDestination = pickDefaultDestination(guessedZone, timeZones);
+
   const originOptions = timeZones.map((zone) => buildTimezoneOption(zone, zone === guessedZone));
-  const destinationOptions = timeZones.map((zone) => buildTimezoneOption(zone, zone === guessedZone));
+  const destinationOptions = timeZones.map((zone) => buildTimezoneOption(zone, zone === defaultDestination));
 
   originSelect.replaceChildren(...originOptions);
   destinationSelect.replaceChildren(...destinationOptions);
-  destinationSelect.value = guessedZone;
+  destinationSelect.value = defaultDestination;
+}
+
+function pickDefaultDestination(originZone, availableZones) {
+  const candidates = [
+    { origin: "Asia/Shanghai", dest: "America/Los_Angeles" },
+    { origin: "Asia/Tokyo", dest: "America/New_York" },
+    { origin: "Asia/Singapore", dest: "Europe/London" },
+    { origin: "America/New_York", dest: "Europe/London" },
+    { origin: "America/Los_Angeles", dest: "Asia/Tokyo" },
+    { origin: "America/Chicago", dest: "Europe/Paris" },
+    { origin: "Europe/London", dest: "America/New_York" },
+    { origin: "Europe/Paris", dest: "Asia/Tokyo" },
+    { origin: "Australia/Sydney", dest: "America/Los_Angeles" },
+  ];
+
+  const match = candidates.find((c) => c.origin === originZone);
+  if (match && availableZones.includes(match.dest)) {
+    return match.dest;
+  }
+
+  const fallbackDest = originZone.startsWith("Asia/") ? "America/New_York"
+    : originZone.startsWith("America/") ? "Europe/London"
+    : originZone.startsWith("Europe/") ? "Asia/Tokyo"
+    : originZone.startsWith("Australia/") ? "America/Los_Angeles"
+    : "America/New_York";
+
+  if (availableZones.includes(fallbackDest)) {
+    return fallbackDest;
+  }
+
+  return originZone;
 }
 
 function buildTimezoneOption(zone, selected) {
@@ -99,6 +132,12 @@ function restoreSavedPlan() {
 
   try {
     const saved = JSON.parse(raw);
+
+    if (saved.originTimezone && saved.destinationTimezone && saved.originTimezone === saved.destinationTimezone) {
+      localStorage.removeItem(STORAGE_KEY);
+      return;
+    }
+
     originSelect.value = saved.originTimezone || originSelect.value;
     destinationSelect.value = saved.destinationTimezone || destinationSelect.value;
     departureInput.value = saved.departureDatetime || departureInput.value;
@@ -110,6 +149,9 @@ function restoreSavedPlan() {
     melatoninInput.checked = Boolean(saved.melatoninOk);
 
     if (saved.lastPlanInput) {
+      if (saved.lastPlanInput.originTimezone === saved.lastPlanInput.destinationTimezone) {
+        return;
+      }
       const plan = buildPlan(saved.lastPlanInput);
       renderPlan(plan);
       lastRenderedPlan = plan;
@@ -126,7 +168,10 @@ function resetForm() {
   chronotypeInput.value = "balanced";
   prepDaysInput.value = "3";
   melatoninInput.checked = true;
-  destinationSelect.value = originSelect.value;
+  destinationSelect.value = pickDefaultDestination(
+    originSelect.value,
+    Array.from(destinationSelect.options).map((o) => o.value)
+  );
   summaryContent.className = "empty-state";
   summaryContent.textContent =
     "生成计划后，这里会显示跨时区方向、时差规模、预计适应节奏和旅行日重点提醒。";

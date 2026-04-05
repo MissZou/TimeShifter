@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>所有已保存计划 · TimeShifter</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell plans-page-shell">
+      <header class="card plans-header-card">
+        <div>
+          <p class="eyebrow">Cloud Plans</p>
+          <h1>所有已保存计划</h1>
+          <p class="hero-text plans-hero-text">
+            这里展示已保存到 Supabase 的全部计划记录。
+          </p>
+        </div>
+        <div class="actions plans-header-actions">
+          <button type="button" id="back-home" class="ghost-button">返回主页</button>
+          <button type="button" id="refresh-plans" class="primary-button">刷新列表</button>
+        </div>
+      </header>
+
+      <section class="card plans-list-card">
+        <div class="section-title">
+          <p class="eyebrow">Saved Records</p>
+          <h2>计划列表</h2>
+        </div>
+        <p id="plans-status" class="fine-print">正在加载...</p>
+        <div id="plans-list" class="plans-list"></div>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="plans.js"></script>
+  </body>
+</html>
