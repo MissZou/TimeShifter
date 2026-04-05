@@ -119,28 +119,12 @@
             </label>
 
             <section class="cloud-sync-box">
-              <p class="cloud-sync-title">Supabase 云同步</p>
-              <div class="field-grid">
-                <label class="field">
-                  <span>Supabase URL</span>
-                  <input id="supabase-url" type="url" placeholder="https://xxxx.supabase.co" />
-                </label>
-                <label class="field">
-                  <span>Supabase Anon Key</span>
-                  <input id="supabase-anon-key" type="password" placeholder="eyJ..." />
-                </label>
-                <label class="field">
-                  <span>同步码</span>
-                  <input id="cloud-sync-key" type="text" placeholder="例如 my-trip-key-001" />
-                </label>
-              </div>
+              <p class="cloud-sync-title">☁ 云同步</p>
               <div class="actions">
-                <button type="button" id="cloud-connect" class="ghost-button">连接云端</button>
                 <button type="button" id="save-plan" class="primary-button">保存计划</button>
                 <button type="button" id="view-all-plans" class="ghost-button">查看全部计划</button>
-                <button type="button" id="cloud-setup-help" class="ghost-button">不会配？一步步引导</button>
               </div>
-              <p id="cloud-status" class="fine-print">未连接云端，仅本地保存。</p>
+              <p id="cloud-status" class="fine-print">正在连接云端...</p>
             </section>
 
             <div class="actions">

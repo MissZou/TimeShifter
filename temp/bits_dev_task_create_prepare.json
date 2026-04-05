@@ -1,0 +1,45 @@
+{
+  "ready": true,
+  "params": {
+    "space_id": {
+      "value": 97878536962,
+      "required": true,
+      "source": "default"
+    },
+    "template": {
+      "value": {
+        "teamflowId": 589923660290,
+        "workflowId": 31529
+      },
+      "required": true,
+      "source": "default",
+      "display": "esop_train-常规模式火车 - esop_train-常规模式火车"
+    },
+    "name": {
+      "value": "testtest",
+      "required": true,
+      "source": "user_input"
+    },
+    "meego": {
+      "value": null,
+      "required": false,
+      "source": "missing"
+    },
+    "projects": {
+      "value": [
+        {
+          "type": "TCE",
+          "projectUniqueId": "zouweiyun.go.helloworld",
+          "branch": "aime_2030502_1772679856",
+          "controlPanel": "CN"
+        }
+      ],
+      "required": true,
+      "source": "user_input"
+    }
+  },
+  "missing_required": [],
+  "template_constraints": {
+    "workitem_must": false
+  }
+}

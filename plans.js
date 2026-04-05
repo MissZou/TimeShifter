@@ -1,4 +1,6 @@
-const SUPABASE_CONFIG_KEY = "timeshifter-supabase-config";
+const SUPABASE_URL = "https://jtnxxcjsmxlpzptybral.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0bnh4Y2pzbXhscHpwdHlicmFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNzM3ODUsImV4cCI6MjA5MDk0OTc4NX0.Aj0w5aJx9G-NDP7nVhIWwWdnF3toBC-LN17AsnzhZHM";
+const CLOUD_SYNC_KEY = "test-001";
 
 const plansStatus = document.getElementById("plans-status");
 const plansList = document.getElementById("plans-list");
@@ -15,32 +17,12 @@ function bootstrapPlansPage() {
   });
   refreshPlansButton.addEventListener("click", loadPlans);
 
-  const config = readSupabaseConfig();
-  if (!config) {
-    plansStatus.textContent = "未发现 Supabase 配置，请先回到主页连接云端。";
-    renderEmpty("尚未配置云端", "请返回主页完成 Supabase 连接，即可在此查看所有已保存计划。");
-    return;
-  }
-
-  supabaseClient = window.supabase.createClient(config.url, config.anonKey);
-  loadPlans();
-}
-
-function readSupabaseConfig() {
-  const raw = localStorage.getItem(SUPABASE_CONFIG_KEY);
-  if (!raw) {
-    return null;
-  }
-
   try {
-    const parsed = JSON.parse(raw);
-    if (!parsed.url || !parsed.anonKey) {
-      return null;
-    }
-    return parsed;
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    loadPlans();
   } catch (error) {
-    console.warn("Failed to parse supabase config", error);
-    return null;
+    plansStatus.textContent = "云端连接失败：" + error.message;
+    renderEmpty("连接失败", "无法连接到云端服务，请稍后重试。");
   }
 }
 

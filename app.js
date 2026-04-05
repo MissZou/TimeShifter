@@ -1,6 +1,9 @@
 const STORAGE_KEY = "timeshifter-web-plan";
 const DEFAULT_WAKE = "07:00";
 const DEFAULT_SLEEP = "23:00";
+const SUPABASE_URL = "https://jtnxxcjsmxlpzptybral.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0bnh4Y2pzbXhscHpwdHlicmFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNzM3ODUsImV4cCI6MjA5MDk0OTc4NX0.Aj0w5aJx9G-NDP7nVhIWwWdnF3toBC-LN17AsnzhZHM";
+const CLOUD_SYNC_KEY = "test-001";
 
 const form = document.getElementById("planner-form");
 const originSelect = document.getElementById("origin-timezone");
@@ -16,17 +19,12 @@ const summaryContent = document.getElementById("summary-content");
 const timeline = document.getElementById("timeline");
 const resetButton = document.getElementById("reset-form");
 const exportCalendarButton = document.getElementById("export-calendar");
-const supabaseUrlInput = document.getElementById("supabase-url");
-const supabaseAnonKeyInput = document.getElementById("supabase-anon-key");
-const cloudSyncKeyInput = document.getElementById("cloud-sync-key");
-const cloudConnectButton = document.getElementById("cloud-connect");
-const cloudLoadLatestButton = document.getElementById("cloud-load-latest");
+const savePlanButton = document.getElementById("save-plan");
+const viewAllPlansButton = document.getElementById("view-all-plans");
 const cloudStatus = document.getElementById("cloud-status");
 const dayCardTemplate = document.getElementById("day-card-template");
 let lastRenderedPlan = null;
 let supabaseClient = null;
-
-const SUPABASE_CONFIG_KEY = "timeshifter-supabase-config";
 
 bootstrap();
 
@@ -34,10 +32,77 @@ function bootstrap() {
   populateTimezones();
   applyDefaults();
   restoreSavedPlan();
+  initSupabase();
 
   form.addEventListener("submit", handleSubmit);
   resetButton.addEventListener("click", resetForm);
   exportCalendarButton.addEventListener("click", handleExportCalendar);
+  savePlanButton.addEventListener("click", handleSavePlan);
+  viewAllPlansButton.addEventListener("click", () => {
+    window.location.href = "plans.html";
+  });
+}
+
+function initSupabase() {
+  try {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    cloudStatus.textContent = "已连接云端。";
+  } catch (error) {
+    cloudStatus.textContent = "云端连接失败：" + error.message;
+  }
+}
+
+async function handleSavePlan() {
+  if (!lastRenderedPlan) {
+    cloudStatus.textContent = "请先生成计划再保存。";
+    return;
+  }
+  if (!supabaseClient) {
+    cloudStatus.textContent = "云端未连接，无法保存。";
+    return;
+  }
+
+  cloudStatus.textContent = "正在保存...";
+  const payload = buildCloudPlanPayload(lastRenderedPlan);
+
+  const { error } = await supabaseClient.from("plans").insert([payload]);
+  if (error) {
+    cloudStatus.textContent = `保存失败：${error.message}`;
+  } else {
+    cloudStatus.textContent = "已保存到云端！";
+  }
+}
+
+function buildCloudPlanPayload(plan) {
+  const { summary, dailyPlan, input } = plan;
+  const title = `${timezoneCityLabel(summary.originTimezone)} → ${timezoneCityLabel(summary.destinationTimezone)} · ${summary.travelDate}`;
+  const contentLines = dailyPlan.map((day) => {
+    const header = `${day.label} ${day.title}（${day.phase}）`;
+    const details = [
+      `- 睡眠: ${day.sleepCore}`,
+      `- 起床: ${day.wakeTime} / 入睡: ${day.bedtime}`,
+      `- 光照: 强光 ${day.lightBright} / 一般 ${day.lightSome} / 避光 ${day.lightAvoid}`,
+      `- 咖啡因: 使用 ${day.caffeineUse} / 避免 ${day.caffeineAvoid}`,
+      day.nap !== "不建议" ? `- 小睡: ${day.nap}` : null,
+      day.melatonin !== "未启用" && day.melatonin !== "通常不需要" && day.melatonin !== "通常不作为首选" ? `- 褪黑素: ${day.melatonin}` : null,
+      ...day.notes.map((n) => `- ${n}`),
+    ].filter(Boolean);
+    return `${header}\n${details.join("\n")}`;
+  });
+
+  return {
+    title,
+    content: contentLines.join("\n\n"),
+    meta: {
+      originTimezone: summary.originTimezone,
+      destinationTimezone: summary.destinationTimezone,
+      direction: summary.direction,
+      absoluteDifference: summary.absoluteDifference,
+      prepDays: summary.prepDays,
+      recoveryDays: summary.recoveryDays,
+      travelDate: summary.travelDate,
+    },
+  };
 }
 
 function populateTimezones() {

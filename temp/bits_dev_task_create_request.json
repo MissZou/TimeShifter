@@ -1,0 +1,346 @@
+{
+  "task": {
+    "title": "testtest",
+    "name": "testtest",
+    "devTaskMode": "standard",
+    "type": "feature",
+    "spaceId": 97878536962,
+    "devTaskTemplateId": 31529,
+    "teamFlowId": "589923660290"
+  },
+  "projects": [
+    {
+      "projectInfo": {
+        "type": "PROJECT_TYPE_TCE",
+        "projectUniqueId": "zouweiyun.go.helloworld",
+        "name": "zouweiyun.go.helloworld",
+        "psm": "zouweiyun.go.helloworld",
+        "ttpWebName": ""
+      },
+      "buildConfigs": [
+        {
+          "scmDependencies": [
+            {
+              "id": 667,
+              "name": "toutiao/load",
+              "commitId": "",
+              "overrideIntegrationScmVersion": false,
+              "gitRepoName": "toutiao/load",
+              "gitRepoId": 503623,
+              "revision": "",
+              "pubBase": "SCM_PUB_BASE_VERSION",
+              "devMode": "Version",
+              "isMain": false,
+              "useLatest": true
+            },
+            {
+              "id": 631,
+              "name": "toutiao/runtime",
+              "commitId": "",
+              "overrideIntegrationScmVersion": false,
+              "gitRepoName": "toutiao/runtime",
+              "gitRepoId": 503626,
+              "revision": "",
+              "pubBase": "SCM_PUB_BASE_VERSION",
+              "devMode": "Version",
+              "isMain": false,
+              "useLatest": true
+            },
+            {
+              "id": 210653,
+              "name": "bytecycle/zouweiyun/zouweiyun0609",
+              "commitId": "",
+              "overrideIntegrationScmVersion": false,
+              "gitRepoName": "zouweiyun/zouweiyun0609",
+              "gitRepoId": 363368,
+              "revision": "",
+              "pubBase": "SCM_PUB_BASE_VERSION",
+              "devMode": "Version",
+              "isMain": false,
+              "useLatest": true
+            },
+            {
+              "id": 246285,
+              "name": "zouweiyun/zouweiyun/zouweiyuntestgo",
+              "commitId": "",
+              "overrideIntegrationScmVersion": false,
+              "gitRepoName": "zouweiyun/zouweiyuntestgo",
+              "gitRepoId": 423894,
+              "revision": "aime_2030502_1772679856",
+              "pubBase": "SCM_PUB_BASE_BRANCH",
+              "devMode": "CodeChange",
+              "isMain": true,
+              "useLatest": false
+            }
+          ],
+          "repoDependencies": [],
+          "controlPanel": "CONTROL_PLANE_CN"
+        }
+      ],
+      "deployDependencies": []
+    }
+  ],
+  "envProjectData": {
+    "method": "CreateBizEnvConfig",
+    "data": "{\"nodeConfigs\":[{\"nodeName\":\"自测\",\"nodeNameI18N\":\"Self testing\",\"nodeFixedName\":\"DevDevelopStageSelfTestTask\",\"boe\":{\"enabled\":true,\"lanes\":[{\"laneType\":\"boe_env_\",\"laneId\":\"self_test_${random}\",\"singleDcDeployment\":{\"isSingleDcDeployment\":false,\"idc\":\"\"},\"overwritePrefix\":\"\",\"laneGcStrategy\":1,\"disableDeploy\":false,\"enableHotDeploy\":true,\"enablePpeDebug\":false,\"envTypes\":[],\"standardEnv\":\"\",\"isolationWay\":0,\"authType\":0,\"envManagers\":[],\"envCollaborators\":[],\"zone\":\"\",\"multiIdcDeployStrategy\":0,\"laneIdSuggest\":\"\",\"suggestIntelligentLaneId\":false,\"includeIntelligentLaneId\":false,\"useIntelligentLaneId\":false,\"suggestUniKey\":\"3199431940015\"}]},\"ppe\":{\"enabled\":true,\"lanes\":[{\"laneType\":\"ppe_cn_env_\",\"laneId\":\"self_test_${random}\",\"singleDcDeployment\":{\"isSingleDcDeployment\":false,\"idc\":\"\"},\"overwritePrefix\":\"\",\"laneGcStrategy\":1,\"disableDeploy\":false,\"enableHotDeploy\":null,\"enablePpeDebug\":false,\"envTypes\":[1],\"standardEnv\":\"\",\"isolationWay\":0,\"authType\":0,\"envManagers\":[],\"envCollaborators\":[],\"zone\":\"\",\"multiIdcDeployStrategy\":0,\"laneIdSuggest\":\"\",\"suggestIntelligentLaneId\":false,\"includeIntelligentLaneId\":false,\"useIntelligentLaneId\":false,\"suggestUniKey\":\"3199432005551\"},{\"laneType\":\"ppe_i18nbd_env_\",\"laneId\":\"self_test_${random}\",\"singleDcDeployment\":{\"isSingleDcDeployment\":false,\"idc\":\"Asia-CIS/MYCISB\"},\"overwritePrefix\":\"\",\"laneGcStrategy\":1,\"disableDeploy\":false,\"enableHotDeploy\":null,\"enablePpeDebug\":false,\"envTypes\":[1],\"standardEnv\":\"\",\"isolationWay\":0,\"authType\":0,\"envManagers\":[],\"envCollaborators\":[],\"zone\":\"\",\"multiIdcDeployStrategy\":0,\"laneIdSuggest\":\"\",\"suggestIntelligentLaneId\":false,\"includeIntelligentLaneId\":false,\"useIntelligentLaneId\":false,\"suggestUniKey\":\"3199432071087\"},{\"laneType\":\"ppe_i18n_env_\",\"laneId\":\"self_test_${random}\",\"singleDcDeployment\":{\"isSingleDcDeployment\":false,\"idc\":\"\"},\"overwritePrefix\":\"\",\"laneGcStrategy\":1,\"disableDeploy\":false,\"enableHotDeploy\":null,\"enablePpeDebug\":false,\"envTypes\":[1],\"standardEnv\":\"\",\"isolationWay\":0,\"authType\":0,\"envManagers\":[],\"envCollaborators\":[],\"zone\":\"\",\"multiIdcDeployStrategy\":0,\"laneIdSuggest\":\"\",\"suggestIntelligentLaneId\":false,\"includeIntelligentLaneId\":false,\"useIntelligentLaneId\":false,\"suggestUniKey\":\"3199431874479\"}]},\"display\":false,\"nodeIDStr\":\"945851\",\"workflowStageNodeId\":\"945851\",\"nodeIDRdStr\":\"945851\"}],\"projectConfigs\":[{\"projectConfigID\":0,\"projectUniqueId\":\"zouweiyun.go.helloworld\",\"projectType\":1,\"controlPlane\":1,\"projectName\":\"zouweiyun.go.helloworld\",\"projectOwner\":\"zouweiyun\",\"projectDetailConfig\":{\"webTTPName\":\"\",\"mainRepoRef\":\"zouweiyun/zouweiyuntestgo\",\"userChooseGeckoChannels\":[]},\"laneProjectConfigs\":[{\"laneInfo\":{\"laneId\":\"self_test_${random}\",\"laneType\":\"ppe_cn_env_\",\"overwritePrefix\":\"\"},\"tceProjectConfig\":{\"clusters\":[{\"name\":\"default\",\"zone\":\"China-North-LF\",\"virtualCluster\":\"PPE/ipv6\",\"dcInfos\":[{\"idc\":\"LF\",\"count\":1}],\"cpu\":1,\"mem\":2,\"existed\":false,\"count\":0,\"networkMode\":null,\"sidecarEgressEnable\":null,\"ipv6onlyEnable\":null,\"newEnvVars\":null,\"hasChanged\":null,\"changedConfig\":null,\"baseClusterId\":4093565,\"suggestExplain\":\"算法推荐\",\"newEnvVarsInit\":null,\"hasEnvVars\":null,\"suggestUniKey\":\"3200405018543\"},{\"name\":\"default\",\"zone\":\"China-North-LF\",\"virtualCluster\":\"PPE/amd\",\"dcInfos\":[{\"idc\":\"HL\",\"count\":1}],\"cpu\":1,\"mem\":2,\"existed\":false,\"count\":0,\"networkMode\":null,\"sidecarEgressEnable\":null,\"ipv6onlyEnable\":null,\"newEnvVars\":null,\"hasChanged\":null,\"changedConfig\":null,\"baseClusterId\":4093565,\"suggestExplain\":\"算法推荐\",\"newEnvVarsInit\":null,\"hasEnvVars\":null,\"suggestUniKey\":\"3200405084079\"}],\"laneType\":\"ppe_cn_env_\",\"laneId\":\"self_test_${random}\",\"overwritePrefix\":\"\",\"singleDcDeployment\":{\"isSingleDcDeployment\":false,\"idc\":\"\"},\"templateInfo\":null,\"enableHotDeploy\":false,\"enablePpeDebug\":false,\"envTypes\":[1],\"type\":null,\"quickSelectType\":\"\",\"quickSelectProd\":[],\"disableDeploy\":null,\"suggestClusterMap\":{},\"existed\":null,\"isFallback\":null},\"webProjectConfig\":null,\"geckoProjectConfig\":null,\"faasProjectConfig\":null,\"cronjobProjectConfig\":null,\"workflowStageNodeId\":\"945851\",\"suggestUniKey\":\"3200404953007\"},{\"laneInfo\":{\"laneId\":\"self_test_${random}\",\"laneType\":\"boe_env_\",\"overwritePrefix\":\"\"},\"tceProjectConfig\":{\"clusters\":[{\"name\":\"default\",\"zone\":\"BOE-Arbutus\",\"virtualCluster\":\"Arbutus/ipv6\",\"dcInfos\":[{\"idc\":\"arbutus\",\"count\":1}],\"cpu\":1,\"mem\":2,\"existed\":false,\"count\":0,\"networkMode\":null,\"sidecarEgressEnable\":null,\"ipv6onlyEnable\":null,\"newEnvVars\":null,\"hasChanged\":null,\"changedConfig\":null,\"baseClusterId\":1591742,\"suggestExplain\":\"算法推荐\",\"newEnvVarsInit\":null,\"hasEnvVars\":null,\"suggestUniKey\":\"3200455350191\"}],\"laneType\":\"boe_env_\",\"laneId\":\"self_test_${random}\",\"overwritePrefix\":\"\",\"singleDcDeployment\":{\"isSingleDcDeployment\":false,\"idc\":\"\"},\"templateInfo\":null,\"enableHotDeploy\":true,\"enablePpeDebug\":false,\"envTypes\":[],\"type\":null,\"quickSelectType\":\"\",\"quickSelectProd\":[],\"disableDeploy\":null,\"suggestClusterMap\":{},\"existed\":null,\"isFallback\":null},\"webProjectConfig\":null,\"geckoProjectConfig\":null,\"faasProjectConfig\":null,\"cronjobProjectConfig\":null,\"workflowStageNodeId\":\"945851\",\"suggestUniKey\":\"3200455284655\"}]}]}"
+  },
+  "envSettingMap": {
+    "945851": {
+      "boe": {
+        "enabled": true,
+        "lanes": [
+          {
+            "laneType": "boe_env_",
+            "laneId": "self_test_${random}",
+            "singleDcDeployment": {
+              "isSingleDcDeployment": false,
+              "idc": ""
+            },
+            "overwritePrefix": "",
+            "laneGcStrategy": "LANE_GC_STRATEGY_TYPE_AFTER_RELEASE",
+            "disableDeploy": false,
+            "enableHotDeploy": true,
+            "enablePpeDebug": false,
+            "envTypes": [],
+            "stageId": "945851",
+            "stageName": "自测"
+          }
+        ]
+      },
+      "ppe": {
+        "enabled": true,
+        "lanes": [
+          {
+            "laneType": "ppe_cn_env_",
+            "laneId": "self_test_${random}",
+            "singleDcDeployment": {
+              "isSingleDcDeployment": false,
+              "idc": ""
+            },
+            "overwritePrefix": "",
+            "laneGcStrategy": "LANE_GC_STRATEGY_TYPE_AFTER_RELEASE",
+            "disableDeploy": false,
+            "enableHotDeploy": null,
+            "enablePpeDebug": false,
+            "envTypes": [
+              "ENV_TYPE_ENV"
+            ],
+            "stageId": "945851",
+            "stageName": "自测"
+          },
+          {
+            "laneType": "ppe_i18nbd_env_",
+            "laneId": "self_test_${random}",
+            "singleDcDeployment": {
+              "isSingleDcDeployment": false,
+              "idc": "Asia-CIS/MYCISB"
+            },
+            "overwritePrefix": "",
+            "laneGcStrategy": "LANE_GC_STRATEGY_TYPE_AFTER_RELEASE",
+            "disableDeploy": false,
+            "enableHotDeploy": null,
+            "enablePpeDebug": false,
+            "envTypes": [
+              "ENV_TYPE_ENV"
+            ],
+            "stageId": "945851",
+            "stageName": "自测"
+          },
+          {
+            "laneType": "ppe_i18n_env_",
+            "laneId": "self_test_${random}",
+            "singleDcDeployment": {
+              "isSingleDcDeployment": false,
+              "idc": ""
+            },
+            "overwritePrefix": "",
+            "laneGcStrategy": "LANE_GC_STRATEGY_TYPE_AFTER_RELEASE",
+            "disableDeploy": false,
+            "enableHotDeploy": null,
+            "enablePpeDebug": false,
+            "envTypes": [
+              "ENV_TYPE_ENV"
+            ],
+            "stageId": "945851",
+            "stageName": "自测"
+          }
+        ]
+      }
+    }
+  },
+  "changes": [
+    {
+      "changeType": "CHANGE_TYPE_CODE",
+      "manifest": {
+        "codeElement": {
+          "sourceBranch": "aime_2030502_1772679856",
+          "targetBranch": "",
+          "repoPath": "zouweiyun/zouweiyuntestgo",
+          "iid": 0,
+          "repoId": 423894,
+          "isCodebaseDraft": false
+        }
+      },
+      "mergeRuleSetting": {
+        "enableSquashCommit": false,
+        "enableRemoveSourceBranch": false
+      }
+    }
+  ],
+  "members": [
+    {
+      "email": "zouweiyun@bytedance.com",
+      "role": "DEVELOPER"
+    }
+  ],
+  "variables": [
+    {
+      "definition": {
+        "name": "IsIntegratedBug",
+        "kind": "VAR_KIND_STRING",
+        "shortDesc": {
+          "value": "",
+          "cn": "",
+          "en": "",
+          "lang": "",
+          "texts": null,
+          "starlingKey": ""
+        },
+        "longDesc": {
+          "value": "",
+          "cn": "",
+          "en": "",
+          "lang": "",
+          "texts": null,
+          "starlingKey": ""
+        },
+        "defaultValue": {
+          "text": "不是修复集成BUG",
+          "rawJson": "不是修复集成BUG"
+        },
+        "fullName": "custom.IsIntegratedBug",
+        "sensitive": false,
+        "deprecated": false,
+        "needLoadWhenRender": false,
+        "uiOption": {
+          "inputType": "UI_INPUT_TYPE_SELECT",
+          "options": [
+            "不是修复集成BUG",
+            "是修复集成BUG"
+          ],
+          "required": true,
+          "final": false,
+          "newOptions": [
+            {
+              "name": "不是修复集成BUG",
+              "label": ""
+            },
+            {
+              "name": "是修复集成BUG",
+              "label": ""
+            }
+          ]
+        }
+      },
+      "value": {
+        "text": "不是修复集成BUG",
+        "rawJson": "不是修复集成BUG"
+      },
+      "groupId": 20340467637506,
+      "version": 3,
+      "associationItems": [
+        {
+          "type": "ASSOCIATION_ITEM_TYPE_DEV_TASK",
+          "detail": {
+            "devTask": {
+              "workflowId": 31529
+            }
+          }
+        }
+      ],
+      "groupName": {
+        "value": "",
+        "cn": "",
+        "en": "",
+        "lang": "",
+        "texts": null,
+        "starlingKey": ""
+      },
+      "customScope": "CUSTOM_SCOPE_DEV_TASK"
+    },
+    {
+      "definition": {
+        "name": "IsNeedQA",
+        "kind": "VAR_KIND_STRING",
+        "shortDesc": {
+          "value": "",
+          "cn": "",
+          "en": "",
+          "lang": "",
+          "texts": null,
+          "starlingKey": ""
+        },
+        "longDesc": {
+          "value": "",
+          "cn": "",
+          "en": "",
+          "lang": "",
+          "texts": null,
+          "starlingKey": ""
+        },
+        "defaultValue": {
+          "text": "需要QA测试",
+          "rawJson": "需要QA测试"
+        },
+        "fullName": "custom.IsNeedQA",
+        "sensitive": false,
+        "deprecated": false,
+        "needLoadWhenRender": false,
+        "uiOption": {
+          "inputType": "UI_INPUT_TYPE_SELECT",
+          "options": [
+            "需要QA测试",
+            "研发自测"
+          ],
+          "required": true,
+          "final": false,
+          "newOptions": [
+            {
+              "name": "需要QA测试",
+              "label": ""
+            },
+            {
+              "name": "研发自测",
+              "label": ""
+            }
+          ]
+        }
+      },
+      "value": {
+        "text": "需要QA测试",
+        "rawJson": "需要QA测试"
+      },
+      "groupId": 20340467637506,
+      "version": 3,
+      "associationItems": [
+        {
+          "type": "ASSOCIATION_ITEM_TYPE_DEV_TASK",
+          "detail": {
+            "devTask": {
+              "workflowId": 31529
+            }
+          }
+        }
+      ],
+      "groupName": {
+        "value": "",
+        "cn": "",
+        "en": "",
+        "lang": "",
+        "texts": null,
+        "starlingKey": ""
+      },
+      "customScope": "CUSTOM_SCOPE_DEV_TASK"
+    }
+  ]
+}
